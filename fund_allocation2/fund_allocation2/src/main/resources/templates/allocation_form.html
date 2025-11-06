@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Create Allocation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/theme.css}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" th:href="@{/allocations/admin/list}">Allocations</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" th:if="${roles != null and roles.contains('admin')}"><a class="nav-link active" th:href="@{/allocations/new}">New</a></li>
+        <li class="nav-item" th:if="${roles != null and roles.contains('admin')}"><a class="nav-link" th:href="@{/allocations/admin/list}">All</a></li>
+        <li class="nav-item" th:if="${roles != null and roles.contains('student')}"><a class="nav-link" th:href="@{/allocations/student/list}">My Allocations</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<main class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <div class="card rounded-4 p-4 p-md-5">
+        <div class="d-flex align-items-center mb-4">
+          <span class="badge badge-soft me-2">Create</span>
+          <h1 class="h4 m-0">New Allocation</h1>
+        </div>
+        <div th:if="${error}" class="alert alert-danger mb-4" th:text="${error}"></div>
+        <form th:action="@{/allocations/save}" method="post" class="needs-validation" novalidate>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Admin</label>
+              <input type="text" class="form-control" th:value="${currentUser}" readonly />
+              <div class="form-text">Your username is recorded automatically.</div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Student Username</label>
+              <input id="studentInput" name="studentUsername" type="text" class="form-control" placeholder="student user" required th:value="${formStudent}" />
+              <div class="invalid-feedback">Student username is required.</div>
+              <div id="studentCheckHint" class="form-text"></div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Amount</label>
+              <input name="amount" id="amountInput" type="number" step="0.01" min="0" class="form-control" placeholder="1000.00" required th:value="${formAmount}" />
+              <div class="invalid-feedback">Enter a valid positive amount.</div>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Purpose</label>
+              <textarea name="purpose" id="purposeInput" rows="3" class="form-control" placeholder="Brief description" required th:text="${formPurpose}"></textarea>
+              <div class="invalid-feedback">Purpose is required.</div>
+            </div>
+          </div>
+          <div class="d-flex gap-3 mt-4">
+            <button type="submit" class="btn btn-brand px-4">Allocate</button>
+            <a class="btn btn-outline-light" th:href="@{/allocations/admin/list}">Cancel</a>
+          </div>
+        </form>
+      </div>
+      <p class="mt-4 text-center footer-muted">Tip: Double‑check the student username before allocating funds.</p>
+    </div>
+  </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+(() => {
+  'use strict';
+  const forms = document.querySelectorAll('.needs-validation');
+  Array.from(forms).forEach(f => {
+    f.addEventListener('submit', evt => {
+      if (!f.checkValidity()) { evt.preventDefault(); evt.stopPropagation(); }
+      const amt = document.getElementById('amountInput');
+      if (amt && (parseFloat(amt.value) <= 0 || isNaN(parseFloat(amt.value)))) { evt.preventDefault(); evt.stopPropagation(); amt.classList.add('is-invalid'); }
+      f.classList.add('was-validated');
+    });
+  });
+  const studentInput = document.getElementById('studentInput');
+  const hint = document.getElementById('studentCheckHint');
+  let timer;
+  function setHint(text,type){ hint.textContent=text||''; hint.className='form-text'+(type?(' text-'+type):''); }
+  function validateStudent(u){ if(!u.trim()){ setHint('',null); return; } fetch(`/allocations/api/check-student?username=${encodeURIComponent(u.trim())}`,{credentials:'same-origin'}).then(r=>r.ok?r.json():null).then(d=>{ if(!d) return; setHint(d.exists? 'Student found.' : 'Student not found or not a student role.', d.exists? 'success':'danger'); }).catch(()=>{}); }
+  if(studentInput){ studentInput.addEventListener('input', ()=>{ clearTimeout(timer); timer=setTimeout(()=>validateStudent(studentInput.value), 350); }); studentInput.addEventListener('blur', ()=>validateStudent(studentInput.value)); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alumni Connect • Student</title>
+  <link rel="stylesheet" href="/dash/dash.css" />
+</head>
+<body>
+<header class="nav">
+  <div class="nav__inner">
+    <a class="brand" href="/">Alumni Connect</a>
+    <nav class="links">
+      <a href="http://localhost:8080/allocations/student/list">My Allocations</a>
+        <a href="http://localhost:8082/appointments/new">Book a slot </a>
+      <a href="http://localhost:9083/jobs">Jobs</a>
+      <a href="http://localhost:9083/applications">Applications</a>
+      <a href="http://localhost:9084/referrals">Referrals</a>
+      <a href="/logout">Logout</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+  <div class="header">
+    <h1>Student Dashboard</h1>
+    <span class="role">Role: student</span>
+  </div>
+  <section class="cards">
+    <div class="card">
+      <h3>Welcome Student</h3>
+      <p>Placeholder content for student-specific features and updates.</p>
+    </div>
+    <div class="card">
+      <h3>Opportunities</h3>
+      <p>Internships, projects, and events curated for students.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <p>© <span id="year"></span> Alumni Connect</p>
+    <div class="footer__links">
+      <a href="/">Home</a>
+      <a href="/create">Sign Up</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/dash/dash.js"></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

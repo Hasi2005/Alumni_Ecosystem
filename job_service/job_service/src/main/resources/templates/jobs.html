@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jobs — Job Service</title>
+  <link th:href="@{/styles.css}" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <h1>Jobs</h1>
+    <div class="user" th:if="${currentUser}">Logged in as <strong th:text="${currentUser}">user</strong></div>
+    <nav class="mini-nav">
+      <a th:if="${canViewJobs}" th:href="@{/jobs}">Jobs</a>
+      <span th:if="${canViewApplications}"> | <a th:href="@{/applications}">Applications</a></span>
+      <span th:if="${canViewReferrals}"> | <a th:href="@{/referrals}">Referrals</a></span>
+      <span> | </span>
+      <a th:if="${isStudent}" th:href="${authPublicBaseUrl + '/test/student'}">Dashboard</a>
+      <a th:if="${isAlumni}" th:href="${authPublicBaseUrl + '/test/alumni'}">Dashboard</a>
+      <a th:if="${isAdmin}" th:href="${authPublicBaseUrl + '/test/admin'}">Dashboard</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <div class="card">
+        <h2>Browse Jobs</h2>
+        <div class="row">
+          <label>
+            Alumni username (optional):
+            <input id="jobs-alumni-filter" placeholder="alumni123" />
+          </label>
+          <button id="btn-load-jobs">Load Jobs</button>
+        </div>
+        <div class="row">
+          <label>
+            Job ID:
+            <input id="job-by-id" type="text" placeholder="e.g. 1" />
+          </label>
+          <button id="btn-load-job-by-id">Load by ID</button>
+        </div>
+        <div id="jobs-meta" class="meta"></div>
+        <div id="jobs-list" class="list"></div>
+        <div id="job-detail" class="detail"></div>
+      </div>
+
+      <div class="card" th:if="${isAlumni}">
+        <h3>Create Job (alumni only)</h3>
+        <div class="grid">
+          <label>Title <input id="job-title" /></label>
+          <label>Type
+            <select id="job-type">
+              <option>JOB</option>
+              <option>INTERNSHIP</option>
+            </select>
+          </label>
+          <label>Location <input id="job-location" /></label>
+          <label>Description <textarea id="job-description"></textarea></label>
+        </div>
+        <button id="btn-create-job">Create Job</button>
+        <div id="create-job-result" class="result"></div>
+      </div>
+
+      <div class="card" th:if="${!isAlumni}">
+        <h3>Create Job</h3>
+        <p><em>Only users with the alumni role can create jobs.</em></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small>Job Service UI • localhost:8083 • Uses cookies from Auth Service on localhost:8081</small>
+  </footer>
+
+  <script th:src="@{/app.js}" defer></script>
+</body>
+</html>

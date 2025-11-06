@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Referrals — Referral Service</title>
+  <link th:href="@{/styles.css}" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <h1>Referrals</h1>
+    <div class="user" th:if="${currentUser}">Logged in as <strong th:text="${currentUser}">user</strong></div>
+    <nav class="mini-nav">
+      <a th:href="${jobPublicBaseUrl + '/jobs'}">Jobs</a>
+      <span> | <a th:href="${jobPublicBaseUrl + '/applications'}">Applications</a></span>
+      <span> | </span>
+      <a th:if="${isStudent}" th:href="${authPublicBaseUrl + '/test/student'}">Dashboard</a>
+      <a th:if="${isAlumni}" th:href="${authPublicBaseUrl + '/test/alumni'}">Dashboard</a>
+      <a th:if="${isAdmin}" th:href="${authPublicBaseUrl + '/test/admin'}">Dashboard</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <div class="card">
+        <h2>Referrals</h2>
+        <div class="row">
+          <button id="btn-my-referrals-student" th:if="${isStudent}">My Referrals (student)</button>
+          <button id="btn-my-referrals-alumni" th:if="${isAlumni}">Incoming Requests (alumni)</button>
+          <button id="btn-all-referrals" th:if="${isAdmin}">All Referrals (admin)</button>
+        </div>
+        <div id="referrals-meta" class="meta"></div>
+        <div id="referrals-list" class="list"></div>
+      </div>
+
+      <div class="card" th:if="${isStudent}">
+        <h3>Request Referral (student)</h3>
+        <div class="grid">
+          <label>Job ID <input id="ref-job-id" type="text" /></label>
+          <label>Alumni Username <input id="ref-alumni-username" /></label>
+        </div>
+        <button id="btn-request-referral">Request Referral</button>
+        <div id="ref-request-result" class="result"></div>
+      </div>
+
+      <div class="card" th:if="${!isStudent}">
+        <h3>Request Referral</h3>
+        <p><em>Only students can request referrals.</em></p>
+      </div>
+
+      <div class="card" th:if="${isAlumni}">
+        <h3>Update Referral Status (alumni)</h3>
+        <div class="row">
+          <label>Referral ID <input id="ref-update-id" type="text" /></label>
+          <label>Status
+            <select id="ref-update-status">
+              <option>APPLIED</option>
+              <option>REFERRED</option>
+              <option>SHORTLISTED</option>
+              <option>INTERVIEWED</option>
+              <option>OFFERED</option>
+              <option>REJECTED</option>
+              <option>JOINED</option>
+            </select>
+          </label>
+          <button id="btn-update-referral">Update</button>
+        </div>
+        <div id="ref-update-result" class="result"></div>
+      </div>
+
+      <div class="card" th:if="${!isAlumni}">
+        <h3>Update Referral Status</h3>
+        <p><em>Only alumni can update referral status.</em></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small>Referral Service UI • localhost:8084 • Uses cookies from Auth Service on localhost:8081</small>
+  </footer>
+
+  <script th:src="@{/app.js}" defer></script>
+</body>
+</html>

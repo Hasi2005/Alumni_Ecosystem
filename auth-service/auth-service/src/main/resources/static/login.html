@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alumni Connect • Sign In</title>
+  <link rel="stylesheet" href="/login.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="nav__inner">
+      <a class="brand" href="/">Alumni Connect</a>
+      <nav class="links">
+        <a href="/">Home</a>
+        <a href="/create">Sign Up</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="auth">
+    <section class="card">
+      <h1>Sign In</h1>
+      <p class="muted">Welcome back. Enter your credentials to continue.</p>
+
+      <form id="login-form" class="form" method="post" action="/login">
+        <div class="field">
+          <label for="username">Username</label>
+          <input id="username" name="username" type="text" autocomplete="username" required placeholder="jane.doe" />
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required placeholder="••••••••" />
+        </div>
+        <button type="submit" class="btn primary">Sign In</button>
+        <p class="hint">No account? <a href="/create">Create one</a>.</p>
+      </form>
+
+      <div id="msg" class="msg" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <p>© <span id="year"></span> Alumni Connect.</p>
+      <nav class="footer__links">
+        <a href="/">Home</a>
+        <a href="/create">Sign Up</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/login.js"></script>
+</body>
+</html>
+

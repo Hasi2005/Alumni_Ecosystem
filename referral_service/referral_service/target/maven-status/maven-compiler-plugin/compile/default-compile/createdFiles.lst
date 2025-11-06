@@ -1,0 +1,16 @@
+com\example\referral_service\controller\ReferralController.class
+com\example\referral_service\job\JobServiceClient.class
+com\example\referral_service\service\ReferralService.class
+com\example\referral_service\dto\ReferralResponse.class
+com\example\referral_service\model\Outcome.class
+com\example\referral_service\dto\ReferralRequest.class
+com\example\referral_service\config\SecurityConfig.class
+com\example\referral_service\controller\ReferralViewController.class
+com\example\referral_service\auth\UserLookupResponse.class
+com\example\referral_service\ReferralServiceApplication.class
+com\example\referral_service\repository\ReferralRepository.class
+com\example\referral_service\auth\AuthServiceClient.class
+com\example\referral_service\auth\MeResponse.class
+com\example\referral_service\model\Referral.class
+com\example\referral_service\web\GlobalModelAttributes.class
+com\example\referral_service\dto\UpdateStatusRequest.class

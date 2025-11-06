@@ -1,0 +1,11 @@
+# Ignore build outputs and VCS
+.target/
+target/
+.git/
+.gitignore
+.idea/
+.vscode/
+**/*.iml
+node_modules/
+.DS_Store
+

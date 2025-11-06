@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Appointments</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/theme.css}">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background: rgba(0,0,0,.25); backdrop-filter: blur(10px); border-bottom:1px solid rgba(255,255,255,.1);">
+  <div class="container">
+    <a class="navbar-brand" th:href="@{/appointments/all}">Mentorship</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" th:if="${isStudent}"><a class="nav-link" th:href="@{/appointments/new}">New</a></li>
+        <li class="nav-item"><a class="nav-link active" th:href="@{/appointments/all}">All</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="container py-5">
+  <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <span class="badge badge-soft">Appointments</span>
+      <h1 class="h4 m-0">Schedule</h1>
+    </div>
+    <div class="d-flex align-items-center gap-2 ms-auto" style="min-width:280px;">
+      <input id="searchInput" type="search" class="form-control" placeholder="Search by student, alumni, or notes" />
+      <select id="statusFilter" class="form-select" style="max-width:180px;">
+        <option value="all" selected>All statuses</option>
+        <option value="SCHEDULED">Scheduled</option>
+        <option value="APPROVED">Approved</option>
+      </select>
+      <a class="btn btn-brand" th:if="${isStudent}" th:href="@{/appointments/new}">Create</a>
+    </div>
+  </div>
+
+  <div class="card rounded-4 p-3 p-md-4">
+    <div th:if="${#lists.isEmpty(appointments)}" class="empty-state text-center">
+      <p class="mb-1">No appointments yet.</p>
+      <a class="btn btn-brand mt-2" th:if="${isStudent}" th:href="@{/appointments/new}">Create your first appointment</a>
+    </div>
+
+    <div th:if="${!#lists.isEmpty(appointments)}" class="table-responsive">
+      <table class="table align-middle" id="appointmentsTable">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Student</th>
+            <th scope="col">Alumni</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Status</th>
+            <th scope="col">Notes</th>
+            <th scope="col" th:if="${isAlumni}">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="a : ${appointments}"
+              th:attr="data-student=${a.studentName}, data-alumni=${a.alumniName}, data-notes=${a.notes}, data-status=${a.status}">
+            <td th:text="${a.id}">1</td>
+            <td th:text="${a.studentName}">Student</td>
+            <td th:text="${a.alumniName}">Alumni</td>
+            <td th:text="${a.appointmentDate}">2025-01-01</td>
+            <td th:text="${a.appointmentTime}">10:00</td>
+            <td>
+              <span class="badge-status"
+                    th:text="${a.status}"
+                    th:classappend="${a.status} == 'APPROVED' ? ' approved' : (${a.status} == 'SCHEDULED' ? ' scheduled' : ' cancelled')"></span>
+            </td>
+            <td>
+              <span th:text="${#strings.isEmpty(a.notes) ? '-' : a.notes}">-</span>
+            </td>
+            <td th:if="${isAlumni}">
+              <form th:if="${a.status} != 'APPROVED'" th:action="@{'/appointments/' + ${a.id} + '/approve'}" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-sm btn-brand">Approve</button>
+              </form>
+              <span th:if="${a.status} == 'APPROVED'" class="text-success">Approved</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="noMatches" class="text-center footer-muted" style="display:none;">No matching appointments.</div>
+    </div>
+  </div>
+
+  <p class="mt-4 text-center footer-muted">All times are local server time.</p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+(() => {
+  const searchInput = document.getElementById('searchInput');
+  const statusFilter = document.getElementById('statusFilter');
+  const table = document.getElementById('appointmentsTable');
+  const noMatches = document.getElementById('noMatches');
+
+  function matches(row, q, status) {
+    const student = (row.getAttribute('data-student') || '').toLowerCase();
+    const alumni = (row.getAttribute('data-alumni') || '').toLowerCase();
+    const notes = (row.getAttribute('data-notes') || '').toLowerCase();
+    const st = (row.getAttribute('data-status') || '');
+    const textHit = !q || student.includes(q) || alumni.includes(q) || notes.includes(q);
+    const statusHit = status === 'all' || st === status;
+    return textHit && statusHit;
+  }
+
+  function applyFilter() {
+    if (!table) return;
+    const q = (searchInput.value || '').toLowerCase();
+    const status = statusFilter.value || 'all';
+    let shown = 0;
+    Array.from(table.tBodies[0].rows).forEach(row => {
+      const ok = matches(row, q, status);
+      row.style.display = ok ? '' : 'none';
+      if (ok) shown++;
+    });
+    if (noMatches) noMatches.style.display = shown === 0 ? '' : 'none';
+  }
+
+  if (searchInput) searchInput.addEventListener('input', applyFilter);
+  if (statusFilter) statusFilter.addEventListener('change', applyFilter);
+})();
+</script>
+</body>
+</html>

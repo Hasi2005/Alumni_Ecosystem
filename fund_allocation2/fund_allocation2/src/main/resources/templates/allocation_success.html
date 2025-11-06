@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Allocation Saved</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/theme.css}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" th:href="@{/allocations/admin/list}">Allocations</a>
+  </div>
+</nav>
+<main class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card rounded-4 p-4 p-md-5 text-center">
+        <h1 class="h4 mb-3">Allocation Saved</h1>
+        <p class="mb-4">The allocation has been recorded successfully.</p>
+        <dl class="row text-start small mb-4">
+          <dt class="col-5">ID</dt><dd class="col-7" th:text="${allocation.id}"></dd>
+          <dt class="col-5">Student</dt><dd class="col-7" th:text="${allocation.studentUsername}"></dd>
+          <dt class="col-5">Amount</dt><dd class="col-7" th:text="${allocation.amount}"></dd>
+          <dt class="col-5">Purpose</dt><dd class="col-7" th:text="${allocation.purpose}"></dd>
+        </dl>
+        <div class="d-flex gap-3 justify-content-center">
+          <a class="btn btn-brand" th:href="@{/allocations/new}">New Allocation</a>
+          <a class="btn btn-outline-light" th:href="@{/allocations/admin/list}">View All</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

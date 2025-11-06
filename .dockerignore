@@ -1,0 +1,9 @@
+# Global ignores to keep Docker build contexts small
+**/target/
+**/.DS_Store
+**/.idea/
+**/.vscode/
+**/*.iml
+**/node_modules/
+*.zip
+

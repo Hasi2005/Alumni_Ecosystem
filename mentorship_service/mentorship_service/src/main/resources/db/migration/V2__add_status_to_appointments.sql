@@ -1,0 +1,1 @@
+-- Add status column to appointments table

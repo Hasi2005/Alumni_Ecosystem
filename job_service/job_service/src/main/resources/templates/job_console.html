@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Job Service Console</title>
+  <link th:href="@{/styles.css}" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <h1>Job Service Console</h1>
+    <p class="note">Ensure you're logged in via the Auth Service first. Cookies from localhost apply across ports.</p>
+    <div class="user" th:if="${currentUser}">Logged in as <strong th:text="${currentUser}">user</strong></div>
+  </header>
+
+  <main>
+    <nav class="tabs">
+      <button class="tab-btn" data-tab="jobs" aria-selected="true">Jobs</button>
+      <button class="tab-btn" data-tab="applications">Applications</button>
+      <button class="tab-btn" data-tab="referrals">Referrals</button>
+    </nav>
+
+    <section id="tab-jobs" class="tab active">
+      <!-- ... same content as original static UI ... -->
+      <div class="card">
+        <h2>Browse Jobs</h2>
+        <div class="row">
+          <label>
+            Alumni username (optional):
+            <input id="jobs-alumni-filter" placeholder="alumni123" />
+          </label>
+          <button id="btn-load-jobs">Load Jobs</button>
+        </div>
+        <div class="row">
+          <label>
+            Job ID:
+            <input id="job-by-id" type="number" placeholder="e.g. 1001" />
+          </label>
+          <button id="btn-load-job-by-id">Load by ID</button>
+        </div>
+        <div id="jobs-list" class="list"></div>
+        <div id="job-detail" class="detail"></div>
+      </div>
+
+      <div class="card">
+        <h3>Create Job (alumni only)</h3>
+        <div class="grid">
+          <label>Title <input id="job-title" /></label>
+          <label>Type
+            <select id="job-type">
+              <option>JOB</option>
+              <option>INTERNSHIP</option>
+            </select>
+          </label>
+          <label>Location <input id="job-location" /></label>
+          <label>Description <textarea id="job-description"></textarea></label>
+        </div>
+        <button id="btn-create-job">Create Job</button>
+        <div id="create-job-result" class="result"></div>
+      </div>
+    </section>
+
+    <section id="tab-applications" class="tab">
+      <div class="card">
+        <h2>Applications</h2>
+        <div class="row">
+          <button id="btn-my-applications">My Applications (student)</button>
+          <button id="btn-all-applications">All Applications (admin)</button>
+        </div>
+        <div id="applications-list" class="list"></div>
+      </div>
+
+      <div class="card">
+        <h3>Apply for a Job (student)</h3>
+        <div class="row">
+          <label>Job ID <input id="apply-job-id" type="number" /></label>
+          <button id="btn-apply">Apply</button>
+        </div>
+        <div id="apply-result" class="result"></div>
+      </div>
+
+      <div class="card">
+        <h3>Update Application Status (admin)</h3>
+        <div class="row">
+          <label>Application ID <input id="app-update-id" type="number" /></label>
+          <label>Status
+            <select id="app-update-status">
+              <option>APPLIED</option>
+              <option>REFERRED</option>
+              <option>SHORTLISTED</option>
+              <option>INTERVIEWED</option>
+              <option>OFFERED</option>
+              <option>REJECTED</option>
+              <option>JOINED</option>
+            </select>
+          </label>
+          <button id="btn-update-application">Update</button>
+        </div>
+        <div id="app-update-result" class="result"></div>
+      </div>
+    </section>
+
+    <section id="tab-referrals" class="tab">
+      <div class="card">
+        <h2>Referrals</h2>
+        <div class="row">
+          <button id="btn-my-referrals-student">My Referrals (student)</button>
+          <button id="btn-my-referrals-alumni">Incoming Requests (alumni)</button>
+          <button id="btn-all-referrals">All Referrals (admin)</button>
+        </div>
+        <div id="referrals-list" class="list"></div>
+      </div>
+
+      <div class="card">
+        <h3>Request Referral (student)</h3>
+        <div class="grid">
+          <label>Job ID <input id="ref-job-id" type="number" /></label>
+          <label>Alumni Username <input id="ref-alumni-username" /></label>
+        </div>
+        <button id="btn-request-referral">Request Referral</button>
+        <div id="ref-request-result" class="result"></div>
+      </div>
+
+      <div class="card">
+        <h3>Update Referral Status (alumni)</h3>
+        <div class="row">
+          <label>Referral ID <input id="ref-update-id" type="number" /></label>
+          <label>Status
+            <select id="ref-update-status">
+              <option>APPLIED</option>
+              <option>REFERRED</option>
+              <option>SHORTLISTED</option>
+              <option>INTERVIEWED</option>
+              <option>OFFERED</option>
+              <option>REJECTED</option>
+              <option>JOINED</option>
+            </select>
+          </label>
+          <button id="btn-update-referral">Update</button>
+        </div>
+        <div id="ref-update-result" class="result"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small>Job Service UI • localhost:8082 • Uses cookies from Auth Service on localhost:8081</small>
+  </footer>
+
+  <script th:src="@{/app.js}" defer></script>
+</body>
+</html>

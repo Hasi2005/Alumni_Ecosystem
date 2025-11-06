@@ -1,0 +1,79 @@
+/* === Auth-like Dark Theme === */
+:root {
+  --bg: #0b1020;
+  --panel: #12182b;
+  --panel-2: #0f1425;
+  --text: #e6eaf2;
+  --muted: #a9b2c3;
+  --primary: #5b8cff;
+  --primary-600: #4275f6;
+  --border: #1e2740;
+}
+
+/* Page background */
+html, body { height: 100%; }
+body {
+  background: radial-gradient(1000px 400px at 50% -20%, rgba(91,140,255,0.20), rgba(0,0,0,0)), linear-gradient(180deg, #0b1020, #0a0d1a);
+  color: var(--text);
+}
+
+/* === Navbar === */
+.navbar { background: rgba(11,16,32,0.75) !important; backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+.navbar .nav-link,
+.navbar .navbar-brand { color: var(--text) !important; font-weight: 600; }
+.navbar .nav-link.active { color: var(--text) !important; background: var(--panel-2); border-radius: 8px; }
+
+/* === Buttons === */
+.btn-brand {
+  background: linear-gradient(180deg, var(--primary), var(--primary-600));
+  border: 1px solid #2a3863;
+  color: #fff;
+  font-weight: 700;
+  padding: 0.55rem 1.25rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 24px rgba(66,117,246,.20);
+}
+.btn-brand:hover { filter: brightness(1.05); color: #fff; }
+
+/* Outline light (for cancel links styled as buttons) */
+.btn-outline-light { border-color: var(--border); color: var(--text); }
+.btn-outline-light:hover { background: var(--panel-2); color: var(--text); }
+
+/* === Badges === */
+.badge-soft {
+  background: rgba(91,140,255,0.12);
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.4rem 0.75rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(91,140,255,0.35);
+}
+
+.badge-status { font-size: 0.75rem; font-weight: 700; padding: 0.35rem 0.7rem; border-radius: 1rem; }
+.badge-status.approved { background: #103524; color: #3ddc97; border: 1px solid #1c5c43; }
+.badge-status.scheduled { background: rgba(91,140,255,0.12); color: var(--primary); border: 1px solid rgba(91,140,255,0.35); }
+.badge-status.cancelled { background: rgba(255,107,107,0.12); color: #ff8f8f; border: 1px solid rgba(255,107,107,0.35); }
+
+/* === Cards & Tables === */
+.card { background: var(--panel); border: 1px solid var(--border); box-shadow: 0 10px 50px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.03); }
+.table { color: var(--text); }
+.table thead { background: rgba(91,140,255,0.08); }
+.table thead th { border-bottom: 2px solid var(--primary-600); color: var(--text); }
+.table tbody tr { border-color: var(--border); }
+
+/* === Forms === */
+.form-control, .form-select, textarea {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.form-control:focus, .form-select:focus, textarea:focus { background: var(--panel-2); color: var(--text); border-color: #2a3863; box-shadow: 0 0 0 .2rem rgba(91,140,255,.15); }
+.form-text { color: var(--text); }
+.invalid-feedback { color: #ffb4b4; }
+
+/* === Helpers === */
+.footer-muted { color: var(--text); font-size: 0.85rem; }
+.text-muted { color: var(--text) !important; }
+
+

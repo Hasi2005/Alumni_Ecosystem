@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Allocation Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/theme.css}">
+    <style>
+        /* ==== Dark theme view form styling ==== */
+        body {
+          background: radial-gradient(circle at top left, #0b0f1a, #050811);
+          color: #ffffff;
+          font-family: 'Inter', sans-serif;
+        }
+
+        .navbar {
+          background: rgba(17, 25, 40, 0.9);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow: 0 0 10px rgba(0, 0, 40, 0.3);
+        }
+
+        .navbar-brand {
+          color: #ffffff !important;
+          font-weight: 600;
+        }
+
+        .card {
+          background: rgba(17, 25, 40, 0.85);
+          color: #ffffff;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow: 0 0 20px rgba(0, 0, 40, 0.4);
+          backdrop-filter: blur(12px);
+          border-radius: 1rem;
+        }
+
+        .card h2 {
+          color: #bcd0ff;
+          font-weight: 600;
+        }
+
+        .card dt {
+          color: #9fbaff;
+          font-weight: 500;
+        }
+
+        .card dd {
+          color: #ffffff;
+          font-weight: 400;
+        }
+
+        .btn-light {
+          background: #1a2cff;
+          color: #ffffff;
+          border: none;
+          border-radius: 0.5rem;
+          transition: all 0.2s ease-in-out;
+          box-shadow: 0 0 10px rgba(26, 44, 255, 0.4);
+        }
+
+        .btn-light:hover {
+          background: #3244ff;
+          color: #e0e4ff;
+          box-shadow: 0 0 15px rgba(50, 68, 255, 0.6);
+        }
+
+        .footer-muted {
+          color: #aab6ff;
+          opacity: 0.8;
+          font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" th:href="@{/allocations/student/list}">My Allocations</a>
+  </div>
+</nav>
+<main class="container py-5">
+  <div class="card rounded-4 p-4" style="max-width:720px;margin:0 auto;">
+    <h2 class="h5 mb-3">Allocation details</h2>
+    <dl class="row">
+      <dt class="col-4">ID</dt><dd class="col-8" th:text="${allocation.id}">1</dd>
+      <dt class="col-4">Amount</dt><dd class="col-8" th:text="${allocation.amount}">$1000</dd>
+      <dt class="col-4">Purpose</dt><dd class="col-8" th:text="${allocation.purpose}">Purpose</dd>
+      <dt class="col-4">Admin</dt><dd class="col-8" th:text="${allocation.adminUsername}">admin</dd>
+    </dl>
+    <div class="mt-3 d-flex justify-content-end">
+      <a th:href="@{/allocations/student/list}" class="btn btn-light btn-sm me-2">Back</a>
+    </div>
+  </div>
+  <p class="mt-4 text-center footer-muted">Viewing allocation as <span th:text="${currentUser}">student</span>.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
