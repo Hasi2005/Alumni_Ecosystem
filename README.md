@@ -20,10 +20,10 @@ docker compose up -d
 
 Services (host URLs)
 - Auth: http://localhost:${AUTH_HOST_PORT:-9081}
-- Mentorship: http://localhost:${MENTORSHIP_HOST_PORT:-9082}
+- Mentorship: http://localhost:${MENTORSHIP_HOST_PORT:-8082}
 - Job: http://localhost:${JOB_HOST_PORT:-9083}
 - Referral: http://localhost:${REFERRAL_HOST_PORT:-9084}
-- Fund Allocation: http://localhost:${FUND_HOST_PORT:-9080}
+- Fund Allocation: http://localhost:${FUND_HOST_PORT:-8080}
 
 MySQL (one container per service; connect with MySQL Workbench)
 - Auth DB:       localhost:${AUTH_DB_HOST_PORT:-3310}  (db: security_db, user: root, pass: from .env)
