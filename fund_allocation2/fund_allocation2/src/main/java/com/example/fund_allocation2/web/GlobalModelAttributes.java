@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 @ControllerAdvice
 @Component
 public class GlobalModelAttributes {
-    @Value("${auth.public.base-url:http://localhost:8081}")
+    @Value("${auth.public.base-url:http://34.66.236.172:8081}")
     private String authPublicBaseUrl;
 
     @ModelAttribute

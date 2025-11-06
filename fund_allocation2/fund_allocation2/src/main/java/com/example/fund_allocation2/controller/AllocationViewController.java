@@ -24,7 +24,7 @@ public class AllocationViewController {
     private final AuthServiceClient authClient;
     private final AllocationService allocationService;
 
-    @Value("${auth.public.base-url:http://localhost:8081}")
+    @Value("${auth.public.base-url:http://34.66.236.172:8081}")
     private String authPublicBaseUrl;
 
     public AllocationViewController(AuthServiceClient authClient, AllocationService allocationService) {

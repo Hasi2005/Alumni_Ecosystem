@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ReferralViewController {
     private final AuthServiceClient authClient;
 
-    @Value("${auth.public.base-url:http://localhost:8081}")
+    @Value("${auth.public.base-url:http://34.66.236.172:8081}")
     private String authPublicBaseUrl;
 
     public ReferralViewController(AuthServiceClient authClient) {

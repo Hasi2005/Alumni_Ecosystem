@@ -67,7 +67,7 @@
     const resp = await fetch('/allocations/student/me', { credentials: 'same-origin' });
     if (resp.status === 401) {
       showStatus('Not authenticated — redirecting to login...', 'warning');
-      setTimeout(() => window.location.href = 'http://localhost:8081/login', 1000);
+      setTimeout(() => window.location.href = 'http://34.66.236.172:8081/login', 1000);
       return;
     }
     if (resp.status === 403) {

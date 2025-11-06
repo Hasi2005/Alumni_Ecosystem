@@ -149,7 +149,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD:-jyothi}
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       AUTH_INTERNAL_BASE_URL: http://auth-service:8081
-      AUTH_PUBLIC_BASE_URL: http://localhost:${AUTH_HOST_PORT:-8081}
+      AUTH_PUBLIC_BASE_URL: http://34.66.236.172:${AUTH_HOST_PORT:-8081}
     ports:
       - "${MENTORSHIP_HOST_PORT:-8082}:8082"
     depends_on:
@@ -166,8 +166,8 @@ services:
       SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD:-jyothi}
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       AUTH_INTERNAL_BASE_URL: http://auth-service:8081
-      AUTH_PUBLIC_BASE_URL: http://localhost:${AUTH_HOST_PORT:-8081}
-      REFERRAL_PUBLIC_BASE_URL: http://localhost:${REFERRAL_HOST_PORT:-8084}
+      AUTH_PUBLIC_BASE_URL: http://34.66.236.172:${AUTH_HOST_PORT:-8081}
+      REFERRAL_PUBLIC_BASE_URL: http://34.66.236.172:${REFERRAL_HOST_PORT:-8084}
     ports:
       - "${JOB_HOST_PORT:-8083}:8083"
     depends_on:
@@ -184,8 +184,8 @@ services:
       SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD:-jyothi}
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       AUTH_INTERNAL_BASE_URL: http://auth-service:8081
-      AUTH_PUBLIC_BASE_URL: http://localhost:${AUTH_HOST_PORT:-8081}
-      JOB_PUBLIC_BASE_URL: http://localhost:${JOB_HOST_PORT:-8083}
+      AUTH_PUBLIC_BASE_URL: http://34.66.236.172:${AUTH_HOST_PORT:-8081}
+      JOB_PUBLIC_BASE_URL: http://34.66.236.172:${JOB_HOST_PORT:-8083}
       JOB_INTERNAL_BASE_URL: http://job-service:8083
     ports:
       - "${REFERRAL_HOST_PORT:-8084}:8084"
@@ -205,7 +205,7 @@ services:
       STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
       STRIPE_PUBLISHABLE_KEY: ${STRIPE_PUBLISHABLE_KEY:-}
       AUTH_INTERNAL_BASE_URL: http://auth-service:8081
-      AUTH_PUBLIC_BASE_URL: http://localhost:${AUTH_HOST_PORT:-8081}
+      AUTH_PUBLIC_BASE_URL: http://34.66.236.172:${AUTH_HOST_PORT:-8081}
     ports:
       - "${FUND_HOST_PORT:-8080}:8080"
     depends_on:

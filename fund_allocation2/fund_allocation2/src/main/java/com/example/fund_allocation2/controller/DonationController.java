@@ -98,8 +98,8 @@ public class DonationController {
             appendForm(form, "mode", "payment");
             // Include session_id placeholder in success URL so client can verify
             // after successful payment Stripe will redirect here; include redirect=true so server can send a browser redirect to the list page
-            appendForm(form, "success_url", "http://localhost:8080/donations/complete?session_id={CHECKOUT_SESSION_ID}&redirect=true");
-            appendForm(form, "cancel_url", "http://localhost:8080/donations/new");
+            appendForm(form, "success_url", "http://34.66.236.172:8080/donations/complete?session_id={CHECKOUT_SESSION_ID}&redirect=true");
+            appendForm(form, "cancel_url", "http://34.66.236.172:8080/donations/new");
             // record who started the session so the server can attribute the payment even if auth cookie is not present on redirect
             appendForm(form, "client_reference_id", me.getUsername());
         } catch (Exception e) {

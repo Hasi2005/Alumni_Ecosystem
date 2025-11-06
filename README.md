@@ -19,18 +19,18 @@ docker compose up -d
 ```
 
 Services (host URLs)
-- Auth: http://localhost:${AUTH_HOST_PORT:-9081}
-- Mentorship: http://localhost:${MENTORSHIP_HOST_PORT:-8082}
-- Job: http://localhost:${JOB_HOST_PORT:-9083}
-- Referral: http://localhost:${REFERRAL_HOST_PORT:-9084}
-- Fund Allocation: http://localhost:${FUND_HOST_PORT:-8080}
+- Auth: http://34.66.236.172:${AUTH_HOST_PORT:-9081}
+- Mentorship: http://34.66.236.172:${MENTORSHIP_HOST_PORT:-8082}
+- Job: http://34.66.236.172:${JOB_HOST_PORT:-9083}
+- Referral: http://34.66.236.172:${REFERRAL_HOST_PORT:-9084}
+- Fund Allocation: http://34.66.236.172:${FUND_HOST_PORT:-8080}
 
 MySQL (one container per service; connect with MySQL Workbench)
-- Auth DB:       localhost:${AUTH_DB_HOST_PORT:-3310}  (db: security_db, user: root, pass: from .env)
-- Mentorship DB: localhost:${MENTORSHIP_DB_HOST_PORT:-3311}  (db: mentorship)
-- Job DB:        localhost:${JOB_DB_HOST_PORT:-3312}  (db: job_service_db)
-- Referral DB:   localhost:${REFERRAL_DB_HOST_PORT:-3313}  (db: referral_service_db)
-- Fund DB:       localhost:${FUND_DB_HOST_PORT:-3314}  (db: fund_db)
+- Auth DB:       34.66.236.172:${AUTH_DB_HOST_PORT:-3310}  (db: security_db, user: root, pass: from .env)
+- Mentorship DB: 34.66.236.172:${MENTORSHIP_DB_HOST_PORT:-3311}  (db: mentorship)
+- Job DB:        34.66.236.172:${JOB_DB_HOST_PORT:-3312}  (db: job_service_db)
+- Referral DB:   34.66.236.172:${REFERRAL_DB_HOST_PORT:-3313}  (db: referral_service_db)
+- Fund DB:       34.66.236.172:${FUND_DB_HOST_PORT:-3314}  (db: fund_db)
 
 Environment overrides
 - Set MYSQL_ROOT_PASSWORD, STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY in .env (already created).

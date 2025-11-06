@@ -11,12 +11,12 @@
     <h1>Referrals</h1>
     <div class="user" th:if="${currentUser}">Logged in as <strong th:text="${currentUser}">user</strong></div>
     <nav class="mini-nav">
-      <a href="http://localhost:8083/jobs">Jobs</a>
-      <span> | <a href="http://localhost:8083/applications">Applications</a></span>
+      <a href="http://34.66.236.172:8083/jobs">Jobs</a>
+      <span> | <a href="http://34.66.236.172:8083/applications">Applications</a></span>
       <span> | </span>
-      <a th:if="${isStudent}" href="http://localhost:8081/test/student">Dashboard</a>
-      <a th:if="${isAlumni}" href="http://localhost:8081/test/alumni">Dashboard</a>
-      <a th:if="${isAdmin}" href="http://localhost:8081/test/admin">Dashboard</a>
+      <a th:if="${isStudent}" href="http://34.66.236.172:8081/test/student">Dashboard</a>
+      <a th:if="${isAlumni}" href="http://34.66.236.172:8081/test/alumni">Dashboard</a>
+      <a th:if="${isAdmin}" href="http://34.66.236.172:8081/test/admin">Dashboard</a>
     </nav>
   </header>
 
@@ -76,7 +76,7 @@
   </main>
 
   <footer>
-    <small>Referral Service UI • localhost:8084 • Uses cookies from Auth Service on localhost:8081</small>
+    <small>Referral Service UI • 34.66.236.172:8084 • Uses cookies from Auth Service on 34.66.236.172:8081</small>
   </footer>
 
   <script th:src="@{/app.js}" defer></script>

@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 public class AuthServiceClient {
     private final RestTemplate restTemplate;
 
-    @Value("${auth.internal.base-url:http://localhost:8081}")
+    @Value("${auth.internal.base-url:http://34.66.236.172:8081}")
     private String authInternalBaseUrl;
 
     public AuthServiceClient(RestTemplate restTemplate) {
